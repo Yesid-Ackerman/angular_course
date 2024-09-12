@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { Title } from '@angular/platform-browser';
 import { map } from 'rxjs';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -64,5 +65,19 @@ export class HomeComponent {
             })
           
     })
+  }
+  // Metodo y Funcion para que el input quede en blanco luego de agregar una tarea
+  newTaskCtrl = new FormControl('',{
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  });
+  inputHandlerY(){
+    if(this.newTaskCtrl.valid){
+      const value = this.newTaskCtrl.value;
+      this.addTask(value);
+      this.newTaskCtrl.setValue('');
+    }
   }
 }

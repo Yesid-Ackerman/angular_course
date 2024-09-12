@@ -4,13 +4,16 @@
         <h1>My Day</h1>
         <p>All my tasks in one place</p>
         <!-- Se llama al metodo (changeHandler) y despues se le envia el evento a ejecutar -->
+                 <!-- (change)="changeHandler($event)" -->
         <input
           class="new-todo"
           placeholder="Type new todo"
           autofocus
           type="text"
-          (change)="changeHandler($event)"
+          [formControl]="newTaskCtrl"
+          (keydown.enter)="inputHandlerY()"
         />
+
       </div>
     </header>
     <div class="container todoapp-wrapper">
