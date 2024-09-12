@@ -62,5 +62,14 @@
     <ng-template #elseBlock>
         Yesith es menor de 18
     </ng-template>
-        
+    <hr/>
+    <!-- Swith que se cumple solo si uno de los casos cumple con el requerimiento -->
+    <input type="text" [value]="person().name" (change)="changeName($event)">
+    <div [ngSwitch]="person().name">
+        <p *ngSwitchCase=" 'Yesith' "> Yo soy el Yesith</p>
+        <p *ngSwitchCase=" 'Julian' "> Yo soy el Julian</p>
+        <p *ngSwitchCase=" 'Alex' "> Yo soy el Alex</p>
+        <p *ngSwitchCase=" 'Juan' "> Yo soy el Juan</p>
+        <p *ngSwitchDefault>No se quien soy</p>
+    </div>
 </div> 

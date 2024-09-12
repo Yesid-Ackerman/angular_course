@@ -68,4 +68,14 @@ changeAge(event: Event){
     }
   });
 }
+changeName(event: Event){
+  const input = event.target as HTMLInputElement;
+  const newValue = input.value;
+  this.person.update(prevState => {
+    return {
+      ... prevState,
+      name: newValue
+    }
+  });
+}
 }
