@@ -20,7 +20,6 @@
     <input type="number" [value]="person.age">
     <button [disabled]="disabled" >Click Me!!</button>
     <p>Person: {{ person.name }}</p>
-
     <hr />
     <!-- Eventos -->
     <button (click)="cliclHandler()">Click here!!</button>
@@ -38,4 +37,13 @@
     <h1>Signals</h1>
     <input type="text" [value]="name()" (change)="changeHandlersignal($event)">
     <p>name: {{ name() }}</p>
-</div>
+    <hr/>
+    <!-- Obtener el valor de una señal con base a un Array-->
+    <h1>Estructuras de Control</h1>
+    <p>Total: {{ taskss().length }}</p>
+    <ul>
+        <li *ngFor="let taskk of taskss() index as i">
+            {{ i }} {{ taskk }}
+        </li>
+    </ul>
+</div> 

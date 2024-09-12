@@ -53,5 +53,10 @@ changeHandlersignal(event: Event ){
   const newValue = input.value;
   this.name.set(newValue)
 }
+taskss = signal([
+  'Hola 1',
+  'Hola 2',
+  'Hola 3'
+]); 
 
 }
