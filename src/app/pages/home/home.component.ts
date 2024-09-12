@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { Title } from '@angular/platform-browser';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -37,11 +38,6 @@ export class HomeComponent {
     //Mejoramos el metodo agregando Typping
     this.addTask(newTask);
   }
-  //Metodo para Eliminar una Tarea
-  deleteTask(index: number){
-    this.tasks.update((tasks)=>tasks.filter((task, position) => position !== index ));
-  }
-
   addTask(tittle: string){
     const newTask = {
       id: Date.now(),
@@ -50,5 +46,23 @@ export class HomeComponent {
     };
     this.tasks.update((tasks)=> [...tasks, newTask])
   }
-  
+  //Metodo para Eliminar una Tarea
+  deleteTask(index: number){
+    this.tasks.update((tasks)=>tasks.filter((task, position) => position !== index ));
+  }
+  // Metodo para Actualizar el estado de una Tarea
+  updateTask(index: number){
+    this.tasks.update((tasks)=>{
+      return tasks.map((task, position) => {
+        if (position === index) {
+          return {
+            ...task,
+            completed: !task.completed
+            }
+            }
+            return task;
+            })
+          
+    })
+  }
 }

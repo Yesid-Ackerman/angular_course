@@ -17,22 +17,22 @@
     <hr />
     <!-- Objetos (person) -->
     <img [src]="image" alt="">
-    <input type="number" [value]="person.age">
+    <input type="number" [value]="person().age">
     <button [disabled]="disabled" >Click Me!!</button>
-    <p>Person: {{ person.name }}</p>
+    <p>Person: {{ person().name }}</p>
     <hr />
     <!-- Eventos -->
     <button (click)="cliclHandler()">Click here!!</button>
     <button (dblclick)="cliclHandler()">double Click!!</button>
     <!-- Console log imprime el evento de cambio solo cuando ya se ha modificado el texto y se presiona Enter -->
     <p>(change)</p>
-    <input type="number" [value]="person.age" (change)="changeHandler($event)">
+    <input type="number" [value]="person().age" (change)="changeHandler($event)">
     <!-- Console log se activa y imprime el historial de cambios que ha sufrido el imput -->
     <p>(keydown)</p>
-    <input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+    <input type="text" [value]="person().name" (keydown)="keydownHandler($event)">
     <!-- Sale una alerta cuando presionas la combinacion de ambas teclas -->
     <p>(keydown shift + T)</p>
-    <input type="text" [value]="person.name" (keydown.shift.t)="shiftAlert()">
+    <input type="text" [value]="person().name" (keydown.shift.t)="shiftAlert()">
     <hr/>
     <h1>Signals</h1>
     <input type="text" [value]="name()" (change)="changeHandlersignal($event)">
@@ -46,4 +46,21 @@
             {{ i }} {{ taskk }}
         </li>
     </ul>
+    <hr/>
+    <div *ngIf="1 !== 1">
+        My Content 1
+    </div>
+    <div *ngIf="name() === 'Yesith' ">
+        Hola Yesith
+    </div>
+    <h1>Edad:</h1>
+    <input type="number" [value]="person().age" (change)="changeAge($event)">
+    <!-- Condicional que me imprime en pantalla un texto segun se cumpla, Cuando no se cumple va y busca a #elseBlock -->
+    <div *ngIf="person().name === 'Yesith' && person().age > 18; else elseBlock ">
+       Yesith es Mayor de 18
+    </div>
+    <ng-template #elseBlock>
+        Yesith es menor de 18
+    </ng-template>
+        
 </div> 
