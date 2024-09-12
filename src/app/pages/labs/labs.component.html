@@ -12,7 +12,7 @@
     <h2>{{ 'Hola Mundo'.repeat(3) }}</h2>
     <p>Hola desde 1 + 2 = {{ 1+2 }}</p>
 
-    <p>Hola soy {{ name }} y tengo {{ edad }}</p>
+    <p>Hola soy {{ name() }} y tengo {{ edad }}</p>
 
     <hr />
     <!-- Objetos (person) -->
@@ -25,6 +25,17 @@
     <!-- Eventos -->
     <button (click)="cliclHandler()">Click here!!</button>
     <button (dblclick)="cliclHandler()">double Click!!</button>
+    <!-- Console log imprime el evento de cambio solo cuando ya se ha modificado el texto y se presiona Enter -->
     <p>(change)</p>
     <input type="number" [value]="person.age" (change)="changeHandler($event)">
+    <!-- Console log se activa y imprime el historial de cambios que ha sufrido el imput -->
+    <p>(keydown)</p>
+    <input type="text" [value]="person.name" (keydown)="keydownHandler($event)">
+    <!-- Sale una alerta cuando presionas la combinacion de ambas teclas -->
+    <p>(keydown shift + T)</p>
+    <input type="text" [value]="person.name" (keydown.shift.t)="shiftAlert()">
+    <hr/>
+    <h1>Signals</h1>
+    <input type="text" [value]="name()" (change)="changeHandlersignal($event)">
+    <p>name: {{ name() }}</p>
 </div>

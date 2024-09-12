@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ export class LabsComponent {
     'Hola 3'
   ];  
 
-  name = 'Yesith';
+  name = signal('Yesith');
   // private edad = 18 -> Esta variable es privada, no pude ser accesada desde el html facilmente
   edad = 18;
 
@@ -39,6 +39,19 @@ cliclHandler(){
 }
 
 changeHandler(event: Event ){
-console.log(event);
+  console.log(event);
 }
+keydownHandler(event: KeyboardEvent){
+  const input = event.target as HTMLInputElement;
+  console.log(input.value);
+}
+shiftAlert(){
+  alert('Has Presionado Shift + t')
+}
+changeHandlersignal(event: Event ){
+  const input = event.target as HTMLInputElement;
+  const newValue = input.value;
+  this.name.set(newValue)
+}
+
 }
