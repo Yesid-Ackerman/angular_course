@@ -13,28 +13,25 @@
           [formControl]="newTaskCtrl"
           (keydown.enter)="inputHandlerY()"
         />
-
       </div>
     </header>
     <div class="container todoapp-wrapper">
-      <!-- This section should be hidden by default and shown when there are todos -->
-       <pre>
-        <code>
-          {{ tasks() | json }}
-        </code>
-       </pre>
+      <!-- This section should be hidden by default and shown when there are todos -->     
       <section class="main">
         <ul class="todo-list">
           <!-- "*ngFor" que contiene normalmente un Array -->
-          <li *ngFor="let task of tasks() index as i">
+          <li (dbclick)="updateTaskEditingMode(i)" 
+          *ngFor="let task of tasks(); index as i" 
+          [class.editing]="task.editing"
+          [class.completed]="task.completed">
             <div class="view">
               <!-- Vuelve reactiva la tarea haciendo que se actualice el estado en que se encuetra (metodo "updateTask()") -->
-              <input class="toggle" type="checkbox" [checked]="task.completed" (change)="updateTask(i)"/>
+              <input (change)="updateTask(i)" class="toggle" type="checkbox" [checked]="task.completed"/>
               <label>{{ task.tittle  }}</label>
               <!-- Agrega Metodo para Eliminar una tarea llamandolo y pasandole como parametyro la posicion del elemento dentro de un Array -->
               <button class="destroy"(click)="deleteTask(i)"></button>
             </div>
-            <input class="edit" value="Buy a unicorn" />
+            <input class="edit" [value]="task.tittle" />
           </li>
           <!-- 
           <li class="completed">

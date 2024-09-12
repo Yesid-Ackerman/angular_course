@@ -29,7 +29,6 @@ export class HomeComponent {
       tittle: 'Tarea Con Identificador 3',
       completed: false
     },
- 
   ]); 
   // Evento para gregar un nuevo elemento a una lista de tareas mediante un input
   changeHandler(event: Event){
@@ -51,21 +50,6 @@ export class HomeComponent {
   deleteTask(index: number){
     this.tasks.update((tasks)=>tasks.filter((task, position) => position !== index ));
   }
-  // Metodo para Actualizar el estado de una Tarea
-  updateTask(index: number){
-    this.tasks.update((tasks)=>{
-      return tasks.map((task, position) => {
-        if (position === index) {
-          return {
-            ...task,
-            completed: !task.completed
-            }
-            }
-            return task;
-            })
-          
-    })
-  }
   // Metodo y Funcion para que el input quede en blanco luego de agregar una tarea
   newTaskCtrl = new FormControl('',{
     nonNullable: true,
@@ -74,10 +58,52 @@ export class HomeComponent {
     ]
   });
   inputHandlerY(){
+    // Validacion para que tareas en blanco no sean agregadas
     if(this.newTaskCtrl.valid){
-      const value = this.newTaskCtrl.value;
-      this.addTask(value);
-      this.newTaskCtrl.setValue('');
+      const value = this.newTaskCtrl.value. trim();
+      if(value !== ''){
+        this.addTask(value);
+        this.newTaskCtrl.setValue('');
+      }    
     }
+  }
+  // Metodo para Actualizar el estado de una Tarea
+  updateTask(index: number){
+    // this.tasks.update((tasks)=>{
+    //   return tasks.map((task, position) => {
+    //     if (position === index) {
+    //       return {
+    //         ...task,
+    //         completed: !task.completed
+    //       }
+    //     }
+    //     return task;
+    //   })
+    // });
+    this.tasks.update(prevState =>{
+      return prevState.map((task, position) => {
+        if (position === index) {
+          return {
+            ...task,
+            completed: !task.completed
+          }
+        }
+        return task;
+      })          
+    });
+    
+  }
+  updateTaskEditingMode(index: number){
+    this.tasks.update(prevState =>{
+      return prevState.map((task, position) => {
+        if (position === index) {
+          return {
+            ...task,
+            editing: true
+          }
+        }
+        return task;
+      })          
+    })
   }
 }

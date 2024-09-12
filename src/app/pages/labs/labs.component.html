@@ -73,6 +73,27 @@
         <p *ngSwitchDefault>No se quien soy</p>
     </div>
     <hr/>
+    <!-- Estructura de color -->
+     <h1>Estructura de Color</h1>
     <input type="color" [formControl]="colorCtrl">
     <p>color: {{colorCtrl.value}} </p>
+    <svg>
+        <g>
+            <rect x="" y="" height="100" width="100" [attr.fill]="colorCtrl.value"/>
+        </g>
+    </svg>
+    <hr/>
+    <!-- Cambiar propiedad css mediante property builder -->
+     <h1>Cambiar propiedad CSS mediante Input</h1>
+    <input type="number" [formControl]="widthCtrl">
+    <span class="box" [style.width.px]="widthCtrl.value"></span>
+    <hr/>
+    <p>
+        <input type="text" [formControl]="nameCtrl"><br />
+        <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre Invalido</span>
+    </p>
+    <p>
+        <input type="text" [formControl]="colorCtrl"><br />
+        <span class=""></span>
+    </p>
 </div> 
