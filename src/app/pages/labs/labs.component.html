@@ -47,12 +47,17 @@
         </li>
     </ul>
     <hr/>
+    <!-- Ambos IF son iguales la diferencia es la moderninad del usuario -->
     <div *ngIf="1 !== 1">
         My Content 1
     </div>
     <div *ngIf="name() === 'Yesith' ">
         Hola Yesith
     </div>
+    @if (name() === 'Yesith') {
+        <div>Hola desde "if" </div>
+    }
+    <hr/>
     <h1>Edad:</h1>
     <input type="number" [value]="person().age" (change)="changeAge($event)">
     <!-- Condicional que me imprime en pantalla un texto segun se cumpla, Cuando no se cumple va y busca a #elseBlock -->
@@ -62,6 +67,13 @@
     <ng-template #elseBlock>
         Yesith es menor de 18
     </ng-template>
+    <!-- Condicional If con la nueva sintaxis y mayor complejidad -->
+    <h2>If Else New Sintax</h2>
+    @if (person().name === 'Yesith' && person().age > 18) {
+        <strong>Hola desde "if" Pero Mayor de 18 </strong>
+    }@else{
+        <i>Hola desde If incorrecto</i>
+    }
     <hr/>
     <!-- Swith que se cumple solo si uno de los casos cumple con el requerimiento -->
     <input type="text" [value]="person().name" (change)="changeName($event)">
@@ -92,8 +104,52 @@
         <input type="text" [formControl]="nameCtrl"><br />
         <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre Invalido</span>
     </p>
-    <p>
-        <input type="text" [formControl]="colorCtrl"><br />
-        <span class=""></span>
-    </p>
+    <hr/>
+    <!-- Bucle For comparacion con la nueva sintaxis -->
+    <h2>New For</h2>
+    <p>Total: {{ taskss().length }}</p>
+    <ul>
+        <li *ngFor="let taskk of taskss() index as i">
+            {{ i }} {{ taskk }}
+        </li>
+    </ul>
+    <ul>
+        @for (task of taskss(); track task; let i = $index) {        
+            <li>
+               <i> {{ i }} {{ task }}</i>
+            </li>
+        }@empty {
+            <strong>No hay tareas</strong>
+        }
+    </ul>
+    <hr/>
+    <h2>New Switch</h2>
+    <!-- Switch con la nueva sintaxis en comparacion a la antigua -->
+    <input type="text" [value]="person().name" (change)="changeName($event)">
+    <div [ngSwitch]="person().name">
+        <p *ngSwitchCase=" 'Yesith' "> Yo soy el Yesith</p>
+        <p *ngSwitchCase=" 'Julian' "> Yo soy el Julian</p>
+        <p *ngSwitchCase=" 'Alex' "> Yo soy el Alex</p>
+        <p *ngSwitchCase=" 'Juan' "> Yo soy el Juan</p>
+        <p *ngSwitchDefault>No se quien soy</p>
+    </div>
+    <div>
+        @switch (person().name) {
+            @case ('Yesith') {
+                <p> Yo soy el Yesith 2.0</p>
+            }
+            @case ('Julian') {
+                <p> Yo soy el Julian 2.0</p>
+            }
+            @case ('Alex') {
+                <p> Yo soy la Alex 2.0</p>
+            }
+            @case ('Juan') {
+                <p> Yo soy el Juan 2.0</p>
+            }
+            @default {
+                <p>No se quien soy 2.0</p>
+            }
+        }
+    </div>
 </div> 
