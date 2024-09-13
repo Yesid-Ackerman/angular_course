@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { Title } from '@angular/platform-browser';
@@ -123,4 +123,19 @@ export class HomeComponent {
       })          
     })
   }
+  filter = signal < 'All' | 'Pending' | 'Completed'> ('All');
+  tasksByFilter = computed(()=>{
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if(filter === 'Pending'){
+      return tasks.filter(task => !task.completed);
+    } if(filter === 'Completed'){
+      return tasks.filter(task => task.completed);
+    }
+    return tasks;
+  });
+  changeFilter(filter:  'All' | 'Pending' | 'Completed'){
+    // this.filter.value = this.filter.value === 'All' ? 'Completed' : 'All';
+    this.filter.set(filter);
+  };
 }
