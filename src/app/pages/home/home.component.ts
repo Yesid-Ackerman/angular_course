@@ -1,5 +1,5 @@
 import { Component, Injector, computed, effect, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Task } from './../../models/task.model';
@@ -7,7 +7,7 @@ import { Task } from './../../models/task.model';
 @Component({
   selector: 'app-home', // Define el selector del componente
   standalone: true, // Indica que este componente no depende de un módulo
-  imports: [CommonModule, ReactiveFormsModule], // Importa los módulos necesarios para el componente
+  imports: [ReactiveFormsModule], // Importa los módulos necesarios para el componente
   templateUrl: './home.component.html', // La ruta al archivo de plantilla HTML
   styleUrls: ['./home.component.css'] // La ruta al archivo de estilos CSS
 })
