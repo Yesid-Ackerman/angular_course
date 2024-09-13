@@ -56,7 +56,7 @@ export class HomeComponent {
     validators: [
       Validators.required,
     ]
-  });
+  }); 
   inputHandlerY(){
     // Validacion para que tareas en blanco no sean agregadas
     if(this.newTaskCtrl.valid){
@@ -68,19 +68,9 @@ export class HomeComponent {
     }
   }
   // Metodo para Actualizar el estado de una Tarea
-  updateTask(index: number){
-    // this.tasks.update((tasks)=>{
-    //   return tasks.map((task, position) => {
-    //     if (position === index) {
-    //       return {
-    //         ...task,
-    //         completed: !task.completed
-    //       }
-    //     }
-    //     return task;
-    //   })
-    // });
-    this.tasks.update(prevState =>{
+  updateTask(index: number) {
+    /*
+    this.tasks.update(prevState => {
       return prevState.map((task, position) => {
         if (position === index) {
           return {
@@ -89,7 +79,16 @@ export class HomeComponent {
           }
         }
         return task;
-      })          
+      })
+    });
+    */
+    this.tasks.update(state => {
+      const currentTask = state[index];
+      state[index] = {
+        ...currentTask,
+        completed: !currentTask.completed
+      };
+      return state;
     });
     
   }
@@ -100,6 +99,24 @@ export class HomeComponent {
           return {
             ...task,
             editing: true
+          }
+        }
+        return {
+          ...task,
+          editing: false
+        };
+      })          
+    })
+  }
+  updateTaskTextEnter(index: number, event: Event){
+    const input = event.target as HTMLInputElement;
+    this.tasks.update(prevState =>{
+      return prevState.map((task, position) => {
+        if (position === index) {
+          return {
+            ...task,
+            tittle : input.value,
+            editing : false
           }
         }
         return task;
