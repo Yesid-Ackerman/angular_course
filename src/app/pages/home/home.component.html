@@ -61,25 +61,25 @@
            -->
         </ul>
       </section>
-      <!-- This footer should be hidden by default and shown when there are todos -->
-      <footer class="footer">
+      <!-- El Footer solo se muestra si se han agregado tareas de lo contrario se oculta-->
+      <footer class="footer" *ngIf="tasksByFilter().length > 0">
         <!-- Contador que me dice el numero de Tareas que Hay en mi Lista-->
         <span class="todo-count">
-          <strong>{{ tasks().length }}</strong>
-          <span *ngIf="tasks().length === 1; else items">item</span>
+          <strong>{{ tasksByFilter().length }}</strong>
+          <span *ngIf="tasksByFilter().length === 1; else items"> item</span>
           <ng-template #items> items</ng-template>
           
         </span> 
         <!-- Remove this if you don't implement routing -->
         <ul class="filters">
           <li>
-            <a (click)="changeFilter('All')" class="selected">All</a>
+            <a (click)="changeFilter('All')" [class.selected]="filter() === 'All'">All</a>
           </li>
           <li>
-            <a (click)="changeFilter('Pending')" >Pending</a>
+            <a (click)="changeFilter('Pending')" [class.selected]="filter() === 'Pending' " >Pending</a>
           </li>
           <li>
-            <a (click)="changeFilter('Completed')">Completed</a>
+            <a (click)="changeFilter('Completed')" [class.selected]="filter()=== 'Completed' ">Completed</a>
           </li>
         </ul>
         <!-- Hidden if no completed items are left ↓ -->
